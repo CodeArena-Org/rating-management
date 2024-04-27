@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option go_package = "github.com/CodeArena-Org/rating-management/grpc_mngm";
+
+package grpc_mngm;
+
+service RatingManagement {
+    rpc GetScores(GetScoreRequest) returns (GetScoreResponse) {}
+    rpc AssignProblem(AssignProblemRequest) returns (AssignProblemResponse) {}
+}
+
+message GetScoreRequest {
+    string winner_id = 1;
+    string looser_id = 2;
+    int32 contest_time = 3; // in minutes
+    int32 wrong_attempts = 4; // number of wrong attempts
+    int32 accepted_time = 5;  // in minutes
+    int32 winner_current_rating = 6; // current rating of the winner
+    int32 looser_current_rating = 7; // current rating of the looser
+}
+
+message GetScoreResponse {
+    int32 winner_score = 1;
+    int32 looser_score = 2;
+}
+
+message AssignProblemRequest {
+    string user1_id = 1;
+    string user2_id = 2;
+    int32 user1_rating = 3;
+    int32 user2_rating = 4;
+}
+
+message AssignProblemResponse {
+    int32 problem_id = 1;
+}
